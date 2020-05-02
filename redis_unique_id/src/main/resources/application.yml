@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: redis-demo
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 20000  # 连接超时时间（毫秒）
+    jedis:
+      pool:
+        max-idle: 20
+        max-wait: -1
+        min-idle: 0
+server:
+  port: 8080
+  servlet:
+    context-path: /redis-demo
