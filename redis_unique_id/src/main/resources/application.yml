@@ -5,7 +5,7 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
-    timeout: 20000  # 连接超时时间（毫秒）
+    timeout: 20000  # 连接超时时间（毫秒）不能写0，否则数据会进入redis，但是程序报错
     jedis:
       pool:
         max-idle: 20

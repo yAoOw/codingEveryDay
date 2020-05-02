@@ -1,0 +1,20 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+server:
+  port: 8086
+spring:
+  application:
+    name: service-zuul
+zuul:
+  routes:
+    order:
+      path: /order/*
+      serviceId: order-service
+    inventory:
+      path: /inventory/*
+      serviceId: inventory-service
+    user:
+      path: /user/*
+      serviceId: user-service
