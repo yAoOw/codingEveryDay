@@ -3,7 +3,17 @@ server:
 spring:
   application:
     name: order-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/my_order?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+  typeAliasesPackage: com.chason.order.domain
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8081/eureka/
+logging:
+  level.*: debug
