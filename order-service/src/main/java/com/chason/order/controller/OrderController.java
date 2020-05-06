@@ -2,10 +2,7 @@ package com.chason.order.controller;
 
 import com.chason.order.domain.MyOrder;
 import com.chason.order.service.OrderService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Administrator
@@ -24,5 +21,12 @@ public class OrderController {
     @PostMapping("/createOrder")
     public void createOrder(@RequestBody MyOrder order){
         orderService.insertOne(order);
+    }
+
+    @GetMapping("/getByOrderNo")
+    public MyOrder getOrder (
+            @RequestParam("orderNo")String orderNo
+    ){
+        return orderService.getOrderByNo(orderNo);
     }
 }

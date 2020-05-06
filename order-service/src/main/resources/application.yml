@@ -1,6 +1,10 @@
 server:
   port: 8083
 spring:
+  cache:
+    redis:
+      use-key-prefix: true
+      time-to-live: 1d
   application:
     name: order-service
   datasource:
@@ -17,6 +21,12 @@ spring:
         max-idle: 20
         max-wait: -1
         min-idle: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   config-location: classpath:mybatis-config.xml

@@ -16,3 +16,5 @@
 4. 集成mybatis
 
 5. redis 实现分布式锁
+
+6. 使用redis实现系统缓存

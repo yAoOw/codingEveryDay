@@ -2,11 +2,13 @@ package com.chason.order.service.impl;
 
 import com.chason.order.config.RedisLock;
 import com.chason.order.domain.MyOrder;
+import com.chason.order.domain.MyOrderExample;
 import com.chason.order.mapper.MyOrderMapper;
 import com.chason.order.service.OrderService;
 import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -42,5 +44,14 @@ public class OrderServiceImpl implements OrderService {
             myOrderMapper.insertSelective(order);
         }
         RedisLock.releaseDistributedLock(jedis,lockKey,requestId);
+    }
+
+    @Override
+    @Cacheable(value = "my_order",key = "#orderNo",unless="#result == null")
+    public MyOrder  getOrderByNo(String orderNo) {
+        MyOrderExample example = new MyOrderExample();
+        MyOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNoEqualTo(orderNo);
+        return myOrderMapper.selectByExample(example).get(0);
     }
 }

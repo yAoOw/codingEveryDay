@@ -9,4 +9,6 @@ import com.chason.order.domain.MyOrder;
 public interface OrderService {
 
     void insertOne(MyOrder order);
+
+    MyOrder getOrderByNo(String orderNo);
 }
